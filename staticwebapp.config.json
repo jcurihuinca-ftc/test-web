@@ -1,0 +1,11 @@
+{
+  "routes": [
+    { "route": "/", "rewrite": "/AutLand4.html" },
+    { "route": "/ProtoLP1.html", "allowedRoles": ["anonymous"] },
+    { "route": "/*", "rewrite": "/AutLand4.html" }
+  ],
+  "navigationFallback": {
+    "rewrite": "/AutLand4.html",
+    "exclude": ["/assets/*", "/*.css", "/*.js", "/*.png", "/*.jpg", "/*.ico"]
+  }
+}

@@ -1,0 +1,1723 @@
+html
+
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Portal Corporativo Aramark</title>
+<style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+        z-index: 1000;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 12px 0;
+        align-items: center;
+    }
+
+    #admin-button {
+        position: absolute;
+        right: 20px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #0078d4;
+        transition: color 0.2s;
+    }
+
+    #admin-button:hover {
+        color: #005a9e;
+    }
+
+    #sitemap-button {
+        position: absolute;
+        left: 20px;
+        background-color: #0078d4;
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background-color 0.2s;
+    }
+
+    #sitemap-button:hover {
+        background-color: #005a9e;
+    }
+
+    .area-card {
+        background-color: #fff;
+        border: 2px solid #c8102e;
+        border-radius: 6px;
+        padding: 10px 20px;
+        margin: 6px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: 600;
+        color: #0078d4;
+        transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+
+    .area-card:hover {
+        background-color: #c8102e;
+        color: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .area-card.active {
+        background-color: #c8102e;
+        color: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero {
+        background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+        background-size: cover;
+        background-position: center;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        text-align: center;
+        padding: 0 20px;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        position: relative;
+    }
+
+    .hero h1 {
+        font-size: 2.8em;
+        margin: 0;
+        font-weight: 400;
+    }
+
+    .hero p {
+        font-size: 1.4em;
+        margin: 10px 0;
+    }
+
+    .hero button {
+        padding: 14px 28px;
+        background-color: #c8102e;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: background-color 0.2s, transform 0.2s;
+    }
+
+    .hero button:hover {
+        background-color: #a50d24;
+        transform: scale(1.05);
+    }
+
+    .main-content {
+        margin-top: 50px;
+        padding: 20px;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background-color: #fff;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .area-content {
+        display: none;
+    }
+
+    .subcats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .subcat {
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+        overflow: hidden;
+        transition: box-shadow 0.2s;
+    }
+
+    .subcat:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
+    }
+
+    .subcat-image {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+    }
+
+    .subcat-header,
+    .func-header {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #0078d4;
+        color: #fff;
+        font-weight: 500;
+        text-align: center;
+        transition: background-color 0.2s;
+    }
+
+    .subcat-header:hover,
+    .func-header:hover {
+        background-color: #005a9e;
+    }
+
+    .subcat-header {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: normal;
+    }
+
+    .subcat-content,
+    .func-content {
+        display: none;
+        padding: 10px;
+    }
+
+    .func {
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background-color: #f9f9f9;
+    }
+
+    .app-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .app-list li {
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+    }
+
+    .app-list a {
+        color: #0078d4;
+        text-decoration: none;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        transition: color 0.2s;
+    }
+
+    .app-list a:hover {
+        color: #005a9e;
+        text-decoration: underline;
+    }
+
+    .app-list input[type="checkbox"] {
+        margin-left: 10px;
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+    }
+
+    .app-icon {
+        width: 22px;
+        height: 22px;
+        margin-right: 6px;
+    }
+
+    .people {
+        background-color: #0078d4;
+        color: #fff;
+        padding: 50px 20px;
+    }
+
+    .people h2 {
+        font-size: 2.2em;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    .people-grid {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .person {
+        width: 200px;
+        margin: 20px;
+        text-align: center;
+    }
+
+    .person img {
+        width: 100%;
+        border-radius: 50%;
+        border: 4px solid #fff;
+    }
+
+    .person p {
+        margin: 10px 0;
+        font-size: .9em;
+    }
+
+    #admin-modal {
+        display: none;
+        position: fixed;
+        z-index: 1001;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+        padding-top: 60px;
+    }
+
+    #admin-content {
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    #close-admin {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    #close-admin:hover,
+    #close-admin:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    #admin-form input {
+        display: block;
+        width: 100%;
+        margin-bottom: 12px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+
+    #admin-form button {
+        padding: 10px 20px;
+        background-color: #0078d4;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: background-color 0.2s;
+    }
+
+    #admin-form button:hover {
+        background-color: #005a9e;
+    }
+
+    #search-results {
+        display: none;
+        background-color: #fff;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+
+    #search-results ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    #search-results li {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    #sitemap-modal {
+        display: none;
+        position: fixed;
+        z-index: 1001;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+        padding-top: 60px;
+    }
+
+    #sitemap-content {
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 800px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    #close-sitemap {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    #close-sitemap:hover,
+    #close-sitemap:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .tree ul {
+        list-style-type: none;
+        padding-left: 20px;
+    }
+
+    .tree li {
+        margin: 6px 0;
+    }
+
+    .tree a {
+        color: #0078d4;
+        text-decoration: none;
+    }
+
+    .tree a:hover {
+        text-decoration: underline;
+    }
+
+    .tree li.has-children {
+        cursor: pointer;
+    }
+
+    .tree ul.collapsible {
+        display: none;
+    }
+
+    .tree ul.level-2 {
+        display: block;
+    }
+
+    #expand-all, #collapse-all {
+        padding: 10px 20px;
+        background-color: #0078d4;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-right: 10px;
+        transition: background-color 0.2s;
+    }
+
+    #expand-all:hover, #collapse-all:hover {
+        background-color: #005a9e;
+    }
+
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2em;
+        }
+
+        .hero p {
+            font-size: 1.1em;
+        }
+
+        .hero button {
+            padding: 12px 24px;
+            font-size: 1em;
+        }
+
+        .main-content {
+            padding: 15px;
+        }
+
+        .subcats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style><style>
+.panel-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 1000px;
+    margin: 32px auto;
+}
+.panel h2, .panel h3 {
+    font-family: inherit;
+}
+@media (max-width: 768px) {
+    .panel-container {
+        padding: 8px;
+    }
+}
+</style><style>
+.hero-buttons {
+    position: absolute;
+    bottom: 1cm;
+    right: 1cm;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.hero-buttons button {
+    background-color: #c8102e;
+    color: #fff;
+    font-size: 1.2em;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.hero-buttons button:hover {
+    background-color: #a50d24;
+    transform: scale(1.02);
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 16px;
+    border-radius: 4px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.modal-content h2 {
+    margin-top: 0;
+    color: #c8102e;
+}
+.modal-content ul {
+    list-style: none;
+    padding: 0;
+}
+.modal-content li {
+    margin: 6px 0;
+}
+.modal-content a {
+    color: #0078d4;
+    text-decoration: none;
+    font-weight: bold;
+}
+.modal-content a:hover {
+    color: #005a9e;
+}
+.close-btn {
+    float: right;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #333;
+}
+</style><style>
+.card-corporativa img {
+    width: 100%;
+    height: auto;
+}
+.card-corporativa .card-footer {
+    background-color: #004080;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+}
+@media
+ (max-width: 768px) {
+    .cards-wrapper {
+        flex-direction: column;
+    }
+}
+</style><style>
+/* Centrar tarjetas de Información Operativa y Soporte y ajustar márgenes /
+.informacion-operativa, .soporte {
+    display: block;
+    margin: 16px auto; / margen superior/inferior y centrado horizontal /
+    max-width: 70%; / mantener diseño responsivo /
+    text-align: center; / centrar contenido interno */
+}
+</style></head><body>
+<header id="header">
+<div id="sitemap-button" onclick="App.ui.showSitemap()">Mapa de Aplicaciones</div>
+<div id="admin-button" onclick="App.ui.showAdminModal()"></div>
+
+<div id="admin-button" onclick="App.ui.showAdminModal()">
+      ⚙️
+     </div>
+</header>
+<section class="hero">
+<h1>Portal Operativo Aramark</h1>
+<p>Herramientas que facilitan tu trabajo diario</p>
+<!-- <button onclick="App.ui.showFirstArea()">Explorar Áreas</button> -->
+<div class="hero-buttons"><button id="btnTutoriales">Ver siempre tutoriales</button><button id="btnFavoritos">Favoritos</button><button id="btnUltimos">10 últimos seleccionados</button></div></section>
+<div class="main-content">
+<input class="search-input" id="search-input" placeholder="Buscar por nombre de aplicación..." type="text"/>
+<div id="search-results"></div>
+<div id="areas-container"></div>
+</div>
+<div id="admin-modal">
+<div id="admin-content">
+<span id="close-admin" onclick="App.ui.closeAdminModal()">×</span>
+<h2>Panel de Administración</h2>
+<p>Define los niveles secuencialmente. Las aplicaciones se agregan en el último nivel especificado. Deja niveles vacíos si no se necesitan. Subir imagen en nivel 2 obligatoria si se usa nivel 2. Icono para app obligatoria si se agrega app.</p>
+<form id="admin-form">
+<input id="level1" placeholder="Nivel 1 (obligatorio)" type="text"/>
+<input id="level2" placeholder="Nivel 2 (opcional)" type="text"/>
+<input id="image_level2" type="file" accept="image/*"/>
+<input id="level3" placeholder="Nivel 3 (opcional)" type="text"/>
+<input id="level4" placeholder="Nivel 4 (opcional)" type="text"/>
+<input id="app" placeholder="Nombre de Aplicación (en el último nivel, si se agrega app)" type="text"/>
+<input id="url" placeholder="Enlace URL (obligatorio si se agrega app)" type="text"/>
+<input id="icon_app" type="file" accept="image/*"/>
+<input id="tutorial" type="file" accept="image/*,video/*" multiple/>
+<button onclick="App.admin.addEntry()" type="button">Guardar</button>
+<button onclick="App.admin.deleteEntry()" type="button">Eliminar</button>
+<button onclick="App.admin.importStructure()" type="button">Importar estructura</button>
+<button onclick="App.admin.exportStructure()" type="button">Exportar estructura</button>
+</form>
+</div>
+</div>
+<div id="sitemap-modal">
+<div id="sitemap-content">
+<span id="close-sitemap" onclick="App.ui.closeSitemap()">×</span>
+<h2>Mapa de Aplicaciones</h2>
+<button id="expand-all">Expandir todo</button>
+<button id="collapse-all">Contraer todo</button>
+<div class="tree" id="sitemap-tree"></div>
+</div>
+</div>
+<div class="modal" id="modalFavoritos"><div class="modal-content"><span class="close-btn">×</span><h2>Favoritos</h2><ul id="favorites-list"></ul></div></div>
+<div class="modal" id="modalUltimos"><div class="modal-content"><span class="close-btn">×</span><h2>10 últimos seleccionados</h2><ul><li><a href="https://www.visitappyauditoriaoperacional.com" target="_blank">VisitAPP y Auditoria Operacional</a></li><li><a href="https://www.apphaberesvariables.com" target="_blank">APP Haberes variables</a></li><li><a href="https://adp.serviciocivil.cl/concursos-spl/opencms/login.html" target="_blank">ADP</a></li><li><a href="https://escritorio.acepta.com/" target="_blank">Escritorio Acepta</a></li><li><a href="https://portalvu.mma.gob.cl/" target="_blank">Plataforma Destión de desechos</a></li><li><a href="https://merieuxnutrisciences.my.site.com/login?locale=us" target="_blank">Nutriscience</a></li><li><a href="https://foodwise-food-wastage-solution.vercel.app/" target="_blank">Foodwise</a></li><li><a href="https://www.menudigitalonlineoffline.com" target="_blank">Menu Digital ONLINE / OFFLINE</a></li><li><a href="https://qasofthsecfront.herokuapp.com/" target="_blank">QASOFT-HSEQ</a></li><li><a href="https://safe.aramarkhseq.cl/login" target="_blank">Safe.aramarkhseq.cl</a></li></ul></div></div>
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+<script>
+const App = (function() {
+  const data = {
+  "BISE": {
+    "Operaciones Generales ": {
+      "Movilidad y Reservas ": [
+        {
+          "name": "Cabify",
+          "url": "https://www.cabify.com"
+        },
+        {
+          "name": "Aramark Reserva",
+          "url": "https://www.aramarkreserva.com"
+        },
+        {
+          "name": "Getaway 24",
+          "url": "https://www.getaway24.com"
+        }
+      ],
+      "Inventario y Punto de Venta ": [
+        {
+          "name": "APP Inventario",
+          "url": "https://www.appinventario.com"
+        },
+        {
+          "name": "Oracle MICROS (Sistema POS para restaurantes y ventas)",
+          "url": "https://www.oraclemicros.com"
+        },
+        {
+          "name": "BASOOM",
+          "url": "https://www.basoom.com"
+        }
+      ],
+      "Auditorías y Visitas Operacionales ": [
+        {
+          "name": "VisitAPP y Auditoria Operacional",
+          "url": "https://www.visitappyauditoriaoperacional.com"
+        }
+      ]
+    },
+    "Finanzas y Administración Económica ": {
+      "Nómina y Compensaciones ": [
+        {
+          "name": "APP Haberes variables",
+          "url": "https://www.apphaberesvariables.com"
+        },
+        {
+          "name": "ADP",
+          "url": "https://adp.serviciocivil.cl/concursos-spl/opencms/login.html"
+        }
+      ],
+      "Gastos y Rendiciones ": [
+        {
+          "name": "RindeGastos",
+          "url": "https://www.rindegastos.com/login"
+        },
+        {
+          "name": "Fractal",
+          "url": "https://www.fractal.com"
+        }
+      ],
+      "Facturación Electrónica ": [
+        {
+          "name": "Escritorio Acepta",
+          "url": "https://escritorio.acepta.com/"
+        }
+      ]
+    },
+    "Gestión de Instalaciones y Sostenibilidad ": {
+      "Facilities y Mantenimiento ": [
+        {
+          "name": "Facility FIT",
+          "url": "https://www.facilityfit.io/"
+        },
+        {
+          "name": "LityBot",
+          "url": "https://www.litybot.com/acceso_futuro"
+        }
+      ],
+      "Gestión de Residuos ": [
+        {
+          "name": "Plataforma Destión de desechos",
+          "url": "https://portalvu.mma.gob.cl/"
+        }
+      ]
+    },
+    "Nutrición, Alimentos y Servicios de Comida ": {
+      "Análisis Nutricional ": [
+        {
+          "name": "Nutriscience",
+          "url": "https://merieuxnutrisciences.my.site.com/login?locale=us"
+        },
+        {
+          "name": "Foodwise",
+          "url": "https://foodwise-food-wastage-solution.vercel.app/"
+        },
+        {
+          "name": "GFF",
+          "url": "https://login.gironafilmfestival.com/"
+        },
+        {
+          "name": "SIMPLE SENSE",
+          "url": "https://app.simplesense.net/"
+        }
+      ],
+      "Gestión de Suministros Alimentarios ": [
+        {
+          "name": "FoodGo",
+          "url": "https://myidentity.aramark.com/"
+        },
+        {
+          "name": "eFoodMax",
+          "url": "https://www.efoodmax.com/ingreso_chefs"
+        },
+        {
+          "name": "Rubika",
+          "url": "https://www.rubika.com"
+        },
+        {
+          "name": "Centro de Servicios Aramark",
+          "url": "https://portal.servicios-supply.aramark.cl"
+        }
+      ],
+      "Menús y Recetas ": [
+        {
+          "name": "Menu Digital ONLINE / OFFLINE",
+          "url": "https://www.menudigitalonlineoffline.com"
+        },
+        {
+          "name": "Menú Board",
+          "url": "https://www.signmenu.com/"
+        },
+        {
+          "name": "Receta Escalada",
+          "url": "https://www.recetaescalada.com"
+        }
+      ]
+    },
+    "Seguridad, Salud y Calidad (HSEQ) ": {
+      "Plataformas HSEQ Integradas ": [
+        {
+          "name": "QASOFT-HSEQ",
+          "url": "https://qasofthsecfront.herokuapp.com/"
+        },
+        {
+          "name": "Safe.aramarkhseq.cl",
+          "url": "https://safe.aramarkhseq.cl/login"
+        }
+      ]
+    },
+    "Recursos Humanos y Gestión de Personal ": {
+      "Autogestión y Portales Empleados ": [
+        {
+          "name": "Autogestion TI",
+          "url": "https://www.autogestionti.com"
+        },
+        {
+          "name": "MyWorkLife",
+          "url": "https://iam.aramark.io/"
+        }
+      ],
+      "Planificación de Turnos y Contratos ": [
+        {
+          "name": "Gestión de Eventuales",
+          "url": "https://dt.psgestion.cl/"
+        },
+        {
+          "name": "Se Negocia",
+          "url": "https://www.senegocia.cl/login"
+        },
+        {
+          "name": "Turnex",
+          "url": "https://www.turnex-app.com/login"
+        }
+      ],
+      "Centros de Servicios y Solicitudes ": [
+        {
+          "name": "Centro de Servicios Aramark",
+          "url": "https://portal.servicios-supply.aramark.cl"
+        },
+        {
+          "name": "Solicitudes y reclamo",
+          "url": "https://www.aramark.cl/informate/contact-us"
+        }
+      ]
+    }
+  },
+  "Minería": {
+    "Operaciones Generales ": {
+      "Movilidad y Reservas ": [
+        {
+          "name": "Cabify",
+          "url": "https://www.cabify.com"
+        },
+        {
+          "name": "Aramark Reserva",
+          "url": "https://www.aramarkreserva.com"
+        },
+        {
+          "name": "Getaway 24",
+          "url": "https://www.getaway24.com"
+        }
+      ]
+    },
+    "Finanzas y Administración Económica ": {
+      "Gastos y Rendiciones ": [
+        {
+          "name": "Fractal",
+          "url": "https://www.fractal.com"
+        }
+      ],
+      "Facturación Electrónica ": [
+        {
+          "name": "Escritorio Acepta",
+          "url": "https://escritorio.acepta.com/"
+        }
+      ]
+    },
+    "Gestión de Instalaciones y Sostenibilidad ": {
+      "Facilities y Mantenimiento ": [
+        {
+          "name": "Facility FIT",
+          "url": "https://www.facilityfit.io/"
+        },
+        {
+          "name": "LityBot",
+          "url": "https://www.litybot.com/acceso_futuro"
+        }
+      ],
+      "Gestión de Residuos ": [
+        {
+          "name": "Plataforma Destión de desechos",
+          "url": "https://portalvu.mma.gob.cl/"
+        }
+      ]
+    },
+    "Nutrición, Alimentos y Servicios de Comida ": {
+      "Análisis Nutricional ": [
+        {
+          "name": "Nutriscience",
+          "url": "https://merieuxnutrisciences.my.site.com/login?locale=us"
+        },
+        {
+          "name": "Foodwise",
+          "url": "https://foodwise-food-wastage-solution.vercel.app/"
+        },
+        {
+          "name": "GFF",
+          "url": "https://login.gironafilmfestival.com/"
+        },
+        {
+          "name": "SIMPLE SENSE",
+          "url": "https://app.simplesense.net/"
+        }
+      ],
+      "Gestión de Suministros Alimentarios ": [
+        {
+          "name": "FoodGo",
+          "url": "https://myidentity.aramark.com/"
+        },
+        {
+          "name": "eFoodMax",
+          "url": "https://www.efoodmax.com/ingreso_chefs"
+        },
+        {
+          "name": "Rubika",
+          "url": "https://www.rubika.com"
+        },
+        {
+          "name": "Centro de Servicios Aramark",
+          "url": "https://portal.servicios-supply.aramark.cl"
+        }
+      ],
+      "Menús y Recetas ": [
+        {
+          "name": "Menu Digital ONLINE / OFFLINE",
+          "url": "https://www.menudigitalonlineoffline.com"
+        }
+      ]
+    },
+    "Seguridad, Salud y Calidad (HSEQ) ": {
+      "Plataformas HSEQ Integradas ": [
+        {
+          "name": "Safe.aramarkhseq.cl",
+          "url": "https://safe.aramarkhseq.cl/login"
+        }
+      ]
+    },
+    "Recursos Humanos y Gestión de Personal ": {
+      "Autogestión y Portales Empleados ": [
+        {
+          "name": "Autogestion TI",
+          "url": "https://www.autogestionti.com"
+        },
+        {
+          "name": "MyWorkLife",
+          "url": "https://iam.aramark.io/"
+        }
+      ],
+      "Planificación de Turnos y Contratos ": [
+        {
+          "name": "Gestión de Eventuales",
+          "url": "https://dt.psgestion.cl/"
+        },
+        {
+          "name": "Se Negocia",
+          "url": "https://www.senegocia.cl/login"
+        }
+      ]
+    }
+  },
+  "Supply Chain": {
+    "Operaciones Generales ": {
+      "Movilidad y Reservas ": [
+        {
+          "name": "Cabify",
+          "url": "https://www.cabify.com"
+        },
+        {
+          "name": "Aramark Reserva",
+          "url": "https://www.aramarkreserva.com"
+        },
+        {
+          "name": "Getaway 24",
+          "url": "https://www.getaway24.com"
+        }
+      ]
+    },
+    "Finanzas y Administración Económica ": {
+      "Gastos y Rendiciones ": [
+        {
+          "name": "Fractal",
+          "url": "https://www.fractal.com"
+        }
+      ],
+      "Facturación Electrónica ": [
+        {
+          "name": "Escritorio Acepta",
+          "url": "https://escritorio.acepta.com/"
+        }
+      ]
+    },
+    "Gestión de Instalaciones y Sostenibilidad ": {
+      "Facilities y Mantenimiento ": [
+        {
+          "name": "Facility FIT",
+          "url": "https://www.facilityfit.io/"
+        },
+        {
+          "name": "LityBot",
+          "url": "https://www.litybot.com/acceso_futuro"
+        }
+      ],
+      "Gestión de Residuos ": [
+        {
+          "name": "Plataforma Destión de desechos",
+          "url": "https://portalvu.mma.gob.cl/"
+        }
+      ]
+    },
+    "Nutrición, Alimentos y Servicios de Comida ": {
+      "Análisis Nutricional ": [
+        {
+          "name": "SIMPLE SENSE",
+          "url": "https://app.simplesense.net/"
+        }
+      ],
+      "Gestión de Suministros Alimentarios ": [
+        {
+          "name": "FoodGo",
+          "url": "https://myidentity.aramark.com/"
+        },
+        {
+          "name": "eFoodMax",
+          "url": "https://www.efoodmax.com/ingreso_chefs"
+        },
+        {
+          "name": "Rubika",
+          "url": "https://www.rubika.com"
+        },
+        {
+          "name": "Centro de Servicios Aramark",
+          "url": "https://portal.servicios-supply.aramark.cl"
+        }
+      ],
+      "Menús y Recetas ": [
+        {
+          "name": "Menu Digital ONLINE / OFFLINE",
+          "url": "https://www.menudigitalonlineoffline.com"
+        }
+      ]
+    },
+    "Seguridad, Salud y Calidad (HSEQ) ": {
+      "Plataformas HSEQ Integradas ": [
+        {
+          "name": "Safe.aramarkhseq.cl",
+          "url": "https://safe.aramarkhseq.cl/login"
+        }
+      ]
+    },
+    "Recursos Humanos y Gestión de Personal ": {
+      "Autogestión y Portales Empleados ": [
+        {
+          "name": "Autogestion TI",
+          "url": "https://www.autogestionti.com"
+        },
+        {
+          "name": "MyWorkLife",
+          "url": "https://iam.aramark.io/"
+        }
+      ],
+      "Planificación de Turnos y Contratos ": [
+        {
+          "name": "Gestión de Eventuales",
+          "url": "https://dt.psgestion.cl/"
+        },
+        {
+          "name": "Se Negocia",
+          "url": "https://www.senegocia.cl/login"
+        }
+      ]
+    }
+  }
+};
+
+  const subcatImages = {
+        "Operaciones Generales": "operaciones_generales.jpg",
+        "Finanzas y Administración Económica": "finanzas_administracion_economica.jpg",
+        "Gestión de Instalaciones y Sostenibilidad": "gestion_instalaciones_sostenibilidad.jpg",
+        "Nutrición, Alimentos y Servicios de Comida": "nutricion_alimentos_servicios_comida.jpg",
+        "Seguridad, Salud y Calidad (HSEQ)": "seguridad_salud_calidad_hseq.jpg",
+        "Recursos Humanos y Gestión de Personal": "recursos_humanos_gestion_personal.jpg"
+    };
+
+  const appIcons = {
+        "Cabify": "https://cdn-icons-png.flaticon.com/512/2972/2972185.png",
+        "Aramark Reserva": "https://cdn-icons-png.flaticon.com/512/3659/3659871.png",
+        "Getaway 24": "https://cdn-icons-png.flaticon.com/512/2247/2247771.png",
+        "APP Inventario": "https://cdn-icons-png.flaticon.com/512/3079/3079025.png",
+        "Oracle MICROS (Sistema POS para restaurantes y ventas)": "https://cdn-icons-png.flaticon.com/512/1055/1055654.png",
+        "BASOOM": "https://cdn-icons-png.flaticon.com/512/11293/11293936.png",
+        "VisitAPP y Auditoria Operacional": "https://cdn-icons-png.flaticon.com/512/2879/2879973.png",
+        "APP Haberes variables": "https://cdn-icons-png.flaticon.com/512/12340/12340945.png",
+        "ADP": "https://cdn-icons-png.flaticon.com/512/12340/12340945.png",
+        "RindeGastos": "https://cdn-icons-png.flaticon.com/512/3082/3082985.png",
+        "Fractal": "https://cdn-icons-png.flaticon.com/512/3082/3082985.png",
+        "Escritorio Acepta": "https://cdn-icons-png.flaticon.com/512/1454/1454276.png",
+        "Facility FIT": "https://cdn-icons-png.flaticon.com/512/10962/10962225.png",
+        "LityBot": "https://cdn-icons-png.flaticon.com/512/11491/11491783.png",
+        "Plataforma Destión de desechos": "https://cdn-icons-png.flaticon.com/512/2892/2892629.png",
+        "Nutriscience": "https://cdn-icons-png.flaticon.com/512/4256/4256589.png",
+        "Foodwise": "https://cdn-icons-png.flaticon.com/512/4256/4256589.png",
+        "GFF": "https://cdn-icons-png.flaticon.com/512/4256/4256589.png",
+        "SIMPLE SENSE": "https://cdn-icons-png.flaticon.com/512/4256/4256589.png",
+        "FoodGo": "https://cdn-icons-png.flaticon.com/512/1048/1048953.png",
+        "eFoodMax": "https://cdn-icons-png.flaticon.com/512/1048/1048953.png",
+        "Rubika": "https://cdn-icons-png.flaticon.com/512/1048/1048953.png",
+        "Centro de Servicios Aramark": "https://cdn-icons-png.flaticon.com/512/1048/1048953.png",
+        "Menu Digital ONLINE / OFFLINE": "https://cdn-icons-png.flaticon.com/512/359/359587.png",
+        "Menú Board": "https://cdn-icons-png.flaticon.com/512/359/359587.png",
+        "Receta Escalada": "https://cdn-icons-png.flaticon.com/512/359/359587.png",
+        "QASOFT-HSEQ": "https://cdn-icons-png.flaticon.com/512/2892/2892629.png",
+        "Safe.aramarkhseq.cl": "https://cdn-icons-png.flaticon.com/512/2892/2892629.png",
+        "Autogestion TI": "https://cdn-icons-png.flaticon.com/512/1048/1048313.png",
+        "MyWorkLife": "https://cdn-icons-png.flaticon.com/512/1048/1048313.png",
+        "Gestión de Eventuales": "https://cdn-icons-png.flaticon.com/512/9131/9131575.png",
+        "Se Negocia": "https://cdn-icons-png.flaticon.com/512/9131/9131575.png",
+        "Turnex": "https://cdn-icons-png.flaticon.com/512/9131/9131575.png",
+        "Solicitudes y reclamo": "https://cdn-icons-png.flaticon.com/512/1048/1048313.png"
+    };
+
+  return {
+    data: data,
+    subcatImages: subcatImages,
+    appIcons: appIcons,
+
+    storage: {
+      saveData: function() {
+        localStorage.setItem('hierarchy', JSON.stringify(data));
+      },
+      getFavorites: function() {
+        return JSON.parse(localStorage.getItem('favorites') || '[]');
+      },
+      saveFavorites: function(favorites) {
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+      }
+    },
+
+    favorites: {
+      addFavorite: function(app) {
+        let favorites = App.storage.getFavorites();
+        if (!favorites.some(fav => fav.name === app.name && fav.url === app.url)) {
+          favorites.push(app);
+          App.storage.saveFavorites(favorites);
+        }
+      },
+      removeFavorite: function(app) {
+        let favorites = App.storage.getFavorites();
+        favorites = favorites.filter(fav => !(fav.name === app.name && fav.url === app.url));
+        App.storage.saveFavorites(favorites);
+      },
+      renderFavorites: function() {
+        const list = document.getElementById('favorites-list');
+        list.innerHTML = '';
+        App.storage.getFavorites().forEach(app => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = app.url;
+          a.target = '_blank';
+          a.textContent = app.name;
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      }
+    },
+
+    rendering: {
+      renderHeader: function() {
+        const header = document.getElementById('header');
+        Object.keys(data).forEach(area => {
+          const card = document.createElement('div');
+          card.className = 'area-card';
+          card.textContent = area;
+          card.onclick = () => App.ui.showArea(area);
+          header.appendChild(card);
+        });
+      },
+      renderAreas: function() {
+        const container = document.getElementById('areas-container');
+        container.innerHTML = '';
+        Object.keys(data).forEach(area => {
+          const div = document.createElement('div');
+          div.id = `content-${area}`;
+          div.className = 'area-content';
+          container.appendChild(div);
+        });
+      },
+      renderSubtree: function(area) {
+        const contentDiv = document.getElementById(`content-${area}`);
+        contentDiv.innerHTML = '';
+        const grid = document.createElement('div');
+        grid.className = 'subcats-grid';
+        const subcats = data[area];
+        Object.keys(subcats).forEach(subcat => {
+          const trimmedSubcat = subcat.trim();
+          const subcatDiv = document.createElement('div');
+          subcatDiv.className = 'subcat';
+          const imgSrc = subcatImages[trimmedSubcat] || 'default_subcat.jpg'; // default local image if needed
+          const img = document.createElement('img');
+          img.src = imgSrc;
+          img.alt = trimmedSubcat;
+          img.className = 'subcat-image';
+          subcatDiv.appendChild(img);
+          const header = document.createElement('div');
+          header.className = 'subcat-header';
+          header.textContent = trimmedSubcat;
+          header.onclick = () => App.ui.toggle(header.nextElementSibling);
+          subcatDiv.appendChild(header);
+          const content = document.createElement('div');
+          content.className = 'subcat-content';
+          subcatDiv.appendChild(content);
+          grid.appendChild(subcatDiv);
+
+          const funcs = subcats[subcat];
+          Object.keys(funcs).forEach(func => {
+            const funcDiv = document.createElement('div');
+            funcDiv.className = 'func';
+            const funcHeader = document.createElement('div');
+            funcHeader.className = 'func-header';
+            funcHeader.textContent = func.trim();
+            funcHeader.onclick = () => App.ui.toggle(funcHeader.nextElementSibling);
+            funcDiv.appendChild(funcHeader);
+            const funcContent = document.createElement('div');
+            funcContent.className = 'func-content';
+            const ul = document.createElement('ul');
+            ul.className = 'app-list';
+            funcs[func].forEach(app => {
+              const li = document.createElement('li');
+              const a = document.createElement('a');
+              a.href = app.url;
+              a.target = '_blank';
+              const iconImg = document.createElement('img');
+              iconImg.src = appIcons[app.name] || 'default_app_icon.png'; // default icon if not found
+              iconImg.className = 'app-icon';
+              a.appendChild(iconImg);
+              a.appendChild(document.createTextNode(app.name));
+              li.appendChild(a);
+              const checkbox = document.createElement('input');
+              checkbox.type = 'checkbox';
+              checkbox.checked = App.storage.getFavorites().some(fav => fav.name === app.name && fav.url === app.url);
+              checkbox.onchange = (e) => {
+                if (e.target.checked) {
+                  App.favorites.addFavorite({ ...app, area, subcat: trimmedSubcat, func: func.trim() });
+                } else {
+                  App.favorites.removeFavorite({ ...app, area, subcat: trimmedSubcat, func: func.trim() });
+                }
+              };
+              li.appendChild(checkbox);
+              ul.appendChild(li);
+            });
+            funcContent.appendChild(ul);
+            funcDiv.appendChild(funcContent);
+            content.appendChild(funcDiv);
+          });
+        });
+        contentDiv.appendChild(grid);
+      }
+    },
+
+    ui: {
+      showArea: function(area) {
+        document.querySelectorAll('.area-content').forEach(content => content.style.display = 'none');
+        document.getElementById(`content-${area}`).style.display = 'block';
+        document.querySelectorAll('.area-card').forEach(card => card.classList.remove('active'));
+        const activeCard = Array.from(document.querySelectorAll('.area-card')).find(card => card.textContent === area);
+        if (activeCard) activeCard.classList.add('active');
+        App.rendering.renderSubtree(area);
+      },
+      showFirstArea: function() {
+        const firstArea = Object.keys(data)[0];
+        if (firstArea) App.ui.showArea(firstArea);
+      },
+      toggle: function(element) {
+        element.style.display = element.style.display === 'block' ? 'none' : 'block';
+      },
+      showSitemap: function() {
+        const modal = document.getElementById('sitemap-modal');
+        const treeDiv = document.getElementById('sitemap-tree');
+        treeDiv.innerHTML = App.sitemap.generateTreeHTML(data);
+        modal.style.display = 'block';
+        document.querySelectorAll('.tree li.has-children > ul.level-3, .tree li.has-children > ul.level-4').forEach(ul => ul.style.display = 'none');
+        document.querySelectorAll('.tree li.has-children').forEach(li => {
+          li.onclick = (e) => {
+            if (e.target === li) {
+              App.ui.toggle(li.querySelector('ul'));
+            }
+          };
+        });
+      },
+      closeSitemap: function() {
+        document.getElementById('sitemap-modal').style.display = 'none';
+      },
+      showAdminModal: function() {
+        document.getElementById('admin-modal').style.display = 'block';
+      },
+      closeAdminModal: function() {
+        document.getElementById('admin-modal').style.display = 'none';
+      },
+      searchApps: function(query) {
+        const resultsDiv = document.getElementById('search-results');
+        resultsDiv.innerHTML = '';
+        if (!query) {
+          resultsDiv.style.display = 'none';
+          document.getElementById('areas-container').style.display = 'block';
+          return;
+        }
+        document.getElementById('areas-container').style.display = 'none';
+        resultsDiv.style.display = 'block';
+        const ul = document.createElement('ul');
+        let found = false;
+        Object.keys(data).forEach(area => {
+          Object.keys(data[area]).forEach(subcat => {
+            Object.keys(data[area][subcat]).forEach(func => {
+              data[area][subcat][func].forEach(app => {
+                if (app.name.toLowerCase().includes(query.toLowerCase())) {
+                  found = true;
+                  const li = document.createElement('li');
+                  li.innerHTML = `${area} > ${subcat.trim()} > ${func.trim()} > <a href="${app.url}" target="_blank">${app.name}</a>`;
+                  ul.appendChild(li);
+                }
+              });
+            });
+          });
+        });
+        if (found) {
+          resultsDiv.appendChild(ul);
+        } else {
+          resultsDiv.innerHTML = '<p>No se encontraron resultados.</p>';
+        }
+      },
+      setupHeroButtons: function() {
+        const btnTutoriales = document.getElementById('btnTutoriales');
+        const btnFavoritos = document.getElementById('btnFavoritos');
+        const btnUltimos = document.getElementById('btnUltimos');
+        const modalFavoritos = document.getElementById('modalFavoritos');
+        const modalUltimos = document.getElementById('modalUltimos');
+        const closeBtns = document.querySelectorAll('.close-btn');
+
+        btnTutoriales.onclick = () => alert('Ver siempre tutoriales');
+        btnFavoritos.onclick = () => {
+          App.favorites.renderFavorites();
+          modalFavoritos.style.display = 'block';
+        };
+        btnUltimos.onclick = () => modalUltimos.style.display = 'block';
+        closeBtns.forEach(btn => {
+          btn.onclick = () => {
+            modalFavoritos.style.display = 'none';
+            modalUltimos.style.display = 'none';
+          };
+        });
+      },
+      setupTourModal: function() {
+        let showTour = localStorage.getItem('showTourModal');
+        if (showTour === null) {
+          showTour = 'true';
+        } else {
+          showTour = showTour !== 'false' ? 'true' : 'false';
+        }
+
+        document.querySelector('.main-content').addEventListener('click', function(e) {
+          const link = e.target.closest('.app-list a');
+          if (link) {
+            const url = link.href;
+            e.preventDefault();
+            if (showTour === 'false') {
+              window.open(url, '_blank');
+              return;
+            }
+
+            const modal = document.getElementById('tourModal');
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            const showAgain = document.getElementById('showAgain');
+            showAgain.checked = true;
+            modal.dataset.url = url;
+            modal.style.display = 'block';
+
+            const handleYes = function() {
+              localStorage.setItem('showTourModal', showAgain.checked ? 'true' : 'false');
+              window.open('tour.jpg', '_blank');
+              modal.style.display = 'none';
+              yesBtn.removeEventListener('click', handleYes);
+              noBtn.removeEventListener('click', handleNo);
+            };
+
+            const handleNo = function() {
+              localStorage.setItem('showTourModal', showAgain.checked ? 'true' : 'false');
+              window.open(modal.dataset.url, '_blank');
+              modal.style.display = 'none';
+              yesBtn.removeEventListener('click', handleYes);
+              noBtn.removeEventListener('click', handleNo);
+            };
+
+            yesBtn.addEventListener('click', handleYes);
+            noBtn.addEventListener('click', handleNo);
+          }
+        });
+      }
+    },
+
+    sitemap: {
+      generateTreeHTML: function(data) {
+        let html = '<ul class="level-1">';
+        Object.keys(data).forEach(area => {
+          html += `<li>${area}`;
+          html += '<ul class="level-2">';
+          Object.keys(data[area]).forEach(subcat => {
+            html += `<li class="has-children">${subcat.trim()}`;
+            html += '<ul class="level-3 collapsible">';
+            Object.keys(data[area][subcat]).forEach(func => {
+              html += `<li class="has-children">${func.trim()}`;
+              html += '<ul class="level-4 collapsible">';
+              data[area][subcat][func].forEach(app => {
+                html += `<li><a href="${app.url}" target="_blank">${app.name}</a></li>`;
+              });
+              html += '</ul></li>';
+            });
+            html += '</ul></li>';
+          });
+          html += '</ul></li>';
+        });
+        html += '</ul>';
+        return html;
+      },
+      expandAll: function() {
+        document.querySelectorAll('.tree ul.collapsible').forEach(ul => ul.style.display = 'block');
+      },
+      collapseAll: function() {
+        document.querySelectorAll('.tree ul.collapsible').forEach(ul => ul.style.display = 'none');
+      }
+    },
+
+    admin: {
+      addEntry: function() {
+        const levels = [
+          document.getElementById('level1').value.trim(),
+          document.getElementById('level2').value.trim(),
+          document.getElementById('level3').value.trim(),
+          document.getElementById('level4').value.trim()
+        ].filter(level => level !== '');
+        const appInput = document.getElementById('app').value.trim();
+        const urlInput = document.getElementById('url').value.trim();
+        const imageLevel2 = document.getElementById('image_level2').files[0];
+        const iconApp = document.getElementById('icon_app').files[0];
+
+        if (!levels.length) {
+          alert('Al menos un nivel es obligatorio');
+          return;
+        }
+
+        if (levels[1] && !imageLevel2) {
+          alert('Imagen para Nivel 2 es obligatoria si se usa Nivel 2');
+          return;
+        }
+
+        if (appInput && !iconApp) {
+          alert('Icono para Aplicación es obligatoria si se agrega app');
+          return;
+        }
+
+        let current = data;
+        levels.forEach((level, index) => {
+          if (index === levels.length - 1) {
+            if (!current[level]) current[level] = [];
+            current = current[level];
+          } else {
+            if (!current[level]) current[level] = {};
+            current = current[level];
+          }
+        });
+
+        if (appInput && urlInput) {
+          current.push({ name: appInput, url: urlInput });
+        } else if (appInput || urlInput) {
+          alert('Para agregar una aplicación, proporcione tanto nombre como URL');
+          return;
+        }
+
+        // Handle file uploads if needed, but since no server, perhaps store base64 or something, but for now, skip implementation
+
+        App.storage.saveData();
+        App.rendering.renderHeader();
+        App.rendering.renderAreas();
+        App.admin.clearForm();
+        App.ui.showFirstArea();
+      },
+      deleteEntry: function() {
+        const levels = [
+          document.getElementById('level1').value.trim(),
+          document.getElementById('level2').value.trim(),
+          document.getElementById('level3').value.trim(),
+          document.getElementById('level4').value.trim()
+        ].filter(level => level !== '');
+        const appInput = document.getElementById('app').value.trim();
+
+        if (!levels.length) {
+          alert('Al menos un nivel es obligatorio');
+          return;
+        }
+
+        let current = data;
+        let parent = null;
+        let lastKey = '';
+        levels.forEach(level => {
+          if (!current[level]) {
+            alert('Nivel no encontrado');
+            return;
+          }
+          parent = current;
+          lastKey = level;
+          current = current[level];
+        });
+
+        if (appInput) {
+          const index = current.findIndex(app => app.name === appInput);
+          if (index === -1) {
+            alert('Aplicación no encontrada');
+            return;
+          }
+          current.splice(index, 1);
+          if (current.length === 0) {
+            delete parent[lastKey];
+          }
+        } else {
+          delete parent[lastKey];
+        }
+
+        App.storage.saveData();
+        App.rendering.renderHeader();
+        App.rendering.renderAreas();
+        App.admin.clearForm();
+        App.ui.showFirstArea();
+      },
+      clearForm: function() {
+        ['level1', 'level2', 'level3', 'level4', 'app', 'url', 'image_level2', 'icon_app'].forEach(id => document.getElementById(id).value = '');
+      },
+      importStructure: function() {
+        document.getElementById('import_file').click();
+      },
+      exportStructure: function() {
+        const rows = [];
+        rows.push(['Level 1', 'Level 2', 'Level 3', 'Level 4', 'App Name', 'URL']);
+        Object.keys(App.data).forEach(level1 => {
+          Object.keys(App.data[level1]).forEach(level2 => {
+            Object.keys(App.data[level1][level2]).forEach(level3 => {
+              App.data[level1][level2][level3].forEach(app => {
+                rows.push([level1, level2.trim(), level3.trim(), '', app.name, app.url]);
+              });
+            });
+          });
+        });
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(rows);
+        XLSX.utils.book_append_sheet(wb, ws, 'Estructura');
+        XLSX.writeFile(wb, 'estructura.xlsx');
+      }
+    },
+
+    parseExcelToData: function(json) {
+      const expectedHeaders = ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'App Name', 'URL'];
+      const headers = json[0];
+      const isValid = expectedHeaders.every((header, index) => headers[index] === header);
+      if (!isValid) {
+        alert('El archivo Excel no tiene el formato correcto. Asegúrese de que las columnas sean: ' + expectedHeaders.join(', '));
+        return null;
+      }
+      const data = {};
+      const seen = new Set();
+      for (let i = 1; i < json.length; i++) {
+        const row = json[i];
+        const levels = [row[0] ? row[0].trim() : '', row[1] ? row[1].trim() : '', row[2] ? row[2].trim() : '', row[3] ? row[3].trim() : ''];
+        const app_name = row[4] || '';
+        const url = row[5] || '';
+        if (!levels[0]) continue;
+        let current = data;
+        let j = 0;
+        let path = [];
+        for (; j < levels.length; j++) {
+          const level = levels[j];
+          if (!level) break;
+          path.push(level);
+          if (j === levels.length - 1 || !levels[j + 1]) {  // Last non-empty level
+            if (!(level in current)) current[level] = [];
+            current = current[level];
+            break;
+          } else {
+            if (!(level in current)) current[level] = {};
+            current = current[level];
+          }
+        }
+        if (app_name && url) {
+          const appKey = path.join('/') + '/' + app_name + '/' + url;
+          if (seen.has(appKey)) {
+            alert(`Fila ${i + 1}: Entrada duplicada detectada para ${app_name} en ${url}`);
+            return null;
+          }
+          seen.add(appKey);
+          current.push({ name: app_name, url: url });
+        } else if (app_name || url) {
+          alert(`Fila ${i + 1}: Para agregar una aplicación, proporcione tanto nombre como URL`);
+          return null;
+        }
+      }
+      return data;
+    },
+
+    init: function() {
+      App.rendering.renderHeader();
+      App.rendering.renderAreas();
+      App.ui.showFirstArea();
+
+      document.getElementById('search-input').addEventListener('input', e => App.ui.searchApps(e.target.value));
+
+      document.getElementById('expand-all').onclick = App.sitemap.expandAll;
+      document.getElementById('collapse-all').onclick = App.sitemap.collapseAll;
+
+      App.ui.setupHeroButtons();
+      App.ui.setupTourModal();
+
+      document.getElementById('import_file').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const arrayBuffer = event.target.result;
+          const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+          const json = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+          const newData = App.parseExcelToData(json);
+          if (newData) {
+            App.data = newData;
+            App.storage.saveData();
+            App.rendering.renderHeader();
+            App.rendering.renderAreas();
+            App.ui.showFirstArea();
+            alert('Estructura importada exitosamente');
+          }
+        };
+        reader.readAsArrayBuffer(file);
+      });
+
+      window.addEventListener('click', function(event) {
+        const sitemapModal = document.getElementById('sitemap-modal');
+        const adminModal = document.getElementById('admin-modal');
+        const tourModal = document.getElementById('tourModal');
+        const modalFavoritos = document.getElementById('modalFavoritos');
+        const modalUltimos = document.getElementById('modalUltimos');
+        if (event.target === sitemapModal) {
+          sitemapModal.style.display = 'none';
+        }
+        if (event.target === adminModal) {
+          adminModal.style.display = 'none';
+        }
+        if (event.target === tourModal) {
+          tourModal.style.display = 'none';
+        }
+        if (event.target === modalFavoritos) {
+          modalFavoritos.style.display = 'none';
+        }
+        if (event.target === modalUltimos) {
+          modalUltimos.style.display = 'none';
+        }
+      });
+    }
+  };
+})();
+
+App.init();
+</script><style>
+/* Modal container */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Modal content box */
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 24px;
+  border-radius: 8px;
+  width: 360px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Modal buttons */
+.modal-content button {
+  margin: 8px 8px 0 8px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.modal-content button#yesBtn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.modal-content button#yesBtn:hover {
+  background-color: #45a049;
+}
+
+.modal-content button#noBtn {
+  background-color: #f44336;
+  color: white;
+}
+
+.modal-content button#noBtn:hover {
+  background-color: #da190b;
+}
+
+/* Checkbox label */
+.modal-content label {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+}
+</style>
+<div class="modal" id="tourModal">
+<div class="modal-content">
+<p><strong>¿Ver tour virtual?</strong></p>
+<button id="yesBtn">Sí</button>
+<button id="noBtn">No</button>
+<label><input id="showAgain" type="checkbox"/> Volver a mostrar</label>
+</div>
+</div>
+<div class="cards-wrapper" style="display:flex; gap:16px; justify-content:space-between; margin:16px auto; max-width:50%;"><div class="info-operativa-container card-corporativa" style="flex:1; background-color:#fff; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05); overflow:hidden; display:flex; flex-direction:column;"><h3 style="color:#c8102e; margin-bottom:8px;">Información Operativa</h3><button class="info-btn" onclick="document.getElementById('operativa-noticias-modal').style.display='block'" style="display:block; width:100%; margin:8px 0; padding:8px; font-size:14px; background:#0078d4; color:#fff; border:none; border-radius:4px; cursor:pointer;">Noticias internas</button><div class="modal" id="operativa-noticias-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4);"><div style="background:#fff; margin:10% auto; padding:16px; width:80%; max-width:400px; border-radius:4px;"><h2>Noticias internas</h2><p>Descripción: Aquí encontrarás noticias internas relevantes para la organización.</p><button onclick="document.getElementById('operativa-noticias-modal').style.display='none'" style="margin-top:12px; padding:8px; background:#c8102e; color:#fff; border:none; border-radius:4px; cursor:pointer;">Cerrar</button></div></div><button class="info-btn" onclick="document.getElementById('operativa-mensajes-modal').style.display='block'" style="display:block; width:100%; margin:8px 0; padding:8px; font-size:14px; background:#0078d4; color:#fff; border:none; border-radius:4px; cursor:pointer;">Mensajes corporativos</button><div class="modal" id="operativa-mensajes-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4);"><div style="background:#fff; margin:10% auto; padding:16px; width:80%; max-width:400px; border-radius:4px;"><h2>Mensajes corporativos</h2><p>Descripción: Aquí encontrarás mensajes corporativos relevantes para la organización.</p><button onclick="document.getElementById('operativa-mensajes-modal').style.display='none'" style="margin-top:12px; padding:8px; background:#c8102e; color:#fff; border:none; border-radius:4px; cursor:pointer;">Cerrar</button></div></div></div><div class="info-operativa-container card-corporativa" style="flex:1; background-color:#fff; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.05); overflow:hidden; display:flex; flex-direction:column;"><h3 style="color:#c8102e; margin-bottom:8px;">Soporte</h3><button class="info-btn" onclick="document.getElementById('soporte-info-modal').style.display='block'" style="display:block; width:100%; margin:8px 0; padding:8px; font-size:14px; background:#0078d4; color:#fff; border:none; border-radius:4px; cursor:pointer;">Información de Soporte</button><div class="modal" id="soporte-info-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4);"><div style="background:#fff; margin:10% auto; padding:16px; width:80%; max-width:400px; border-radius:4px;"><h2>Información de Soporte</h2><p>Descripción: Aquí encontrarás información de soporte relevante para la organización.</p><button onclick="document.getElementById('soporte-info-modal').style.display='none'" style="margin-top:12px; padding:8px; background:#c8102e; color:#fff; border:none; border-radius:4px; cursor:pointer;">Crea un ticket</button></div></div><button class="info-btn" onclick="document.getElementById('soporte-ticket-modal').style.display='block'" style="display:block; width:100%; margin:8px 0; padding:8px; font-size:14px; background:#c8102e; color:#fff; border:none; border-radius:4px; cursor:pointer;">Crea tu ticket</button><div class="modal" id="soporte-ticket-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4);"><div style="background:#fff; margin:10% auto; padding:16px; width:80%; max-width:400px; border-radius:4px;"><h2>Crea tu ticket</h2><p>Descripción: Aquí encontrarás mensajes corporativos relevantes para la organización.</p><button onclick="document.getElementById('soporte-ticket-modal').style.display='none'" style="margin-top:12px; padding:8px; background:#c8102e; color:#fff; border:none; border-radius:4px; cursor:pointer;">Cerrar</button></div></div></div></div></body></html>
+
